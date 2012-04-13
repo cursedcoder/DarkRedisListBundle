@@ -1,0 +1,17 @@
+parameters:
+    dark_redis.list_manager.class: Dark\RedisListBundle\Redis\ListManager
+    dark_redis.list_pagination.class: Dark\RedisListBundle\Redis\ListPagination
+
+services:
+     predis_client:
+         alias: snc_redis.default_client
+
+     dark_redis.list_manager:
+        class: %dark_redis.list_manager.class%
+        arguments:
+            - "@predis_client"
+
+     dark_redis.list_pagination:
+        class: %dark_redis.list_pagination.class%
+        arguments:
+            - "@predis_client"
