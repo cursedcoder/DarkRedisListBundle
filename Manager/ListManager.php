@@ -1,8 +1,6 @@
 <?php
 
-namespace Dark\RedisListBundle\Redis;
-
-use Dark\RedisListBundle\Redis\ListException;
+namespace Dark\RedisListBundle\Manager;
 
 use Predis\Client;
 
@@ -17,6 +15,8 @@ class ListManager
 
     public function push($listName, $value)
     {
+        $value = $this->processValue($value);
+
         $lastId = $this->client->hlen($listName);
         $this->client->hset($listName, $lastId + 1, $value);
     }
@@ -26,7 +26,7 @@ class ListManager
         $lastId = $this->client->hlen($listName);
 
         if ($id > $lastId) {
-            throw new ListException('Recieved wrong id.');
+            throw new ManagerException('Received wrong id.');
         }
 
         for ($i = $id; $i < $lastId && $lastId != $id; $i++) {
@@ -44,10 +44,10 @@ class ListManager
         $valueTo = $this->client->hget($listName, $toId);
 
         if ($valueFrom > $lastId) {
-            throw new ListException('Recieved wrong $fromId.');
+            throw new ManagerException('Received wrong $fromId.');
         }
         if ($valueTo > $lastId) {
-            throw new ListException('Recieved wrong $toId.');
+            throw new ManagerException('Received wrong $toId.');
         }
 
         $this->client->hset($listName, $fromId, $valueTo);
@@ -68,7 +68,7 @@ class ListManager
         $listDump = $this->client->hgetall($listName);
 
         if (count($listDump) == 0) {
-            throw new ListException(sprintf('List %s is empty', $listName));
+            throw new ManagerException(sprintf('List %s is empty', $listName));
         }
 
         $holes = array_values($listDump);
@@ -77,5 +77,18 @@ class ListManager
             $this->client->del($listName);
             $this->client->hmset($listName, $holes);
         }
+    }
+
+    protected function processValue($value)
+    {
+        if (is_object($value)) {
+            if (!method_exists($value, 'getId')) {
+                throw new ManagerException('Object should have getId() method.');
+            }
+
+            $value = sprintf('%s;%s', get_class($value), $value->getId());
+        }
+
+        return $value;
     }
 }

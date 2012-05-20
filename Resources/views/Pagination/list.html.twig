@@ -1,0 +1,24 @@
+{% if pageCount > 0 %}
+<ul class="pagination">
+{% if prev is defined %}
+    {% if pageCount > pageRange and prev != 1 %}
+    <li class="first"><a href="{{ path(route, { 'page': 1 }) }}">&laquo;</a></li>
+    {% endif %}
+    <li class="prev"><a href="{{ path(route, { 'page': prev }) }}">&larr;</a></li>
+{% endif %}
+{% for page in pagesInRange %}
+    {% if page != current %}
+        <li><a href="{{ path(route, { 'page': page }) }}">{{ page }}</a></li>
+    {% else %}
+        <li class="current">{{ page }}</li>
+    {% endif %}
+{% endfor %}
+{% if next is defined %}
+    <li class="next"><a href="{{ path(route, { 'page': next }) }}">&rarr;</a></li>
+    {% if pageCount > pageRange and next != pageCount  %}
+    <li class="last"><a href="{{ path(route, { 'page': pageCount }) }}">&raquo;</a></li>
+    {% endif %}
+{% endif %}
+    
+</ul>
+{% endif %}
