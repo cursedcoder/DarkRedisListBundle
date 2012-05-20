@@ -45,3 +45,46 @@ Okay, but how it's can satisfy my requirements?
 - if new element passed to list, no need to reload old entities from DB
 - it allows to list a few types of entities as one list
 - it allows to list random entities from list freely, cuz ids are holistic, and also no need to fetch them from DB
+
+## Installation
+
+Add DarkRedisListBundle in your composer.json
+
+```js
+{
+    "require": {
+        "cursedcoder/dark-redis-list-bundle": "*"
+    }
+}
+```
+
+Register the bundle in your `app/AppKernel.php`:
+
+```php
+<?php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new Dark\RedisListBundle\DarkRedisListBundle(),
+    );
+)
+```
+
+## Repositories
+* Single — fetches entities one at a time (1 request per entity)
+* Pieces — fetches entities by pieces, for example for list "Post1, Post2, Answer1, Answer2, Post3, Post4" it will take 3 requests
+
+## Configuration reference
+
+```jinja
+# app/config.yml
+dark_redis_list:
+    repository: single # or pieces
+    template: DarkRedisListBundle:Pagination:list.html.twig
+    time: 604800 # cache lifetime, 0 by default
+```
+
+## Credits
+I wrote this bundle for my own needs, so don't angry if anything will going not good :P
