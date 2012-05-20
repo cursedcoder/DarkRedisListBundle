@@ -1,8 +1,12 @@
+# DarkRedisListBundle [![Build Status](https://secure.travis-ci.org/cursedcoder/DarkRedisListBundle.png?branch=master)](http://travis-ci.org/cursedcoder/DarkRedisListBundle)
+Symfony2 bundle which allows you to store part of doctrine entities data in Redis.
+For more information please read text below.
+
 ### How do we manage lists at MySQL:
 - write query, for example 'SELECT a FROM MyTestBundle:Post a ORDER BY a.created_at'
 - use doctrine repository
 
-then we can pass it to the paginator, but no need talk about it now.
+then we can pass it to the paginator, but no need to talk about it now.
 
 ### But I need more functionality to those lists:
 - combine few entity types at one list\query

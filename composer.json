@@ -1,7 +1,7 @@
 {
     "name":        "cursedcoder/dark-redis-list-bundle",
     "type":        "symfony-bundle",
-    "description": "Symfony2 bundle which allows you to store part of doctrine entities data in Redis..",
+    "description": "Symfony2 bundle which allows you to store part of doctrine entities data in Redis.",
     "keywords":    ["redis", "list", "cursedcoder", "doctrine"],
     "homepage":    "http://github.com/cursedcoder/DarkRedisListBundle",
     "license":     "MIT",
