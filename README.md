@@ -72,7 +72,7 @@ public function registerBundles()
 )
 ```
 
-## Repositories
+## Collectors
 * Single — fetches entities one at a time (1 request per entity)
 * Pieces — fetches entities by pieces, for example for list "Post1, Post2, Answer1, Answer2, Post3, Post4" it will take 3 requests
 
@@ -81,7 +81,7 @@ public function registerBundles()
 ```jinja
 # app/config.yml
 dark_redis_list:
-    repository: single # or pieces
+    collector: single # or pieces
     template: DarkRedisListBundle:Pagination:list.html.twig
     time: 604800 # cache lifetime, 0 by default
 ```

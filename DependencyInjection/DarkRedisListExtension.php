@@ -20,12 +20,12 @@ class DarkRedisListExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $repo = $config['repository'];
+        $collector = $config['collector'];
 
-        if (!in_array($repo, array('single', 'pieces'))) {
-            throw new \InvalidArgumentException('Bad repository name, you can use only "single" or "pieces"');
+        if (!in_array($collector, array('single', 'pieces'))) {
+            throw new \InvalidArgumentException('Bad collector name, you can use only "single" or "pieces"');
         }
 
-        $container->setAlias('dark_redis_list.repository', 'dark_redis_list.repository.' . $repo);
+        $container->setAlias('dark_redis_list.collector', 'dark_redis_list.collector.' . $collector);
     }
 }

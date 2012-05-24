@@ -4,21 +4,21 @@ namespace Dark\RedisListBundle\Pagination;
 
 use Predis\Client;
 use Symfony\Component\HttpFoundation\Request;
-use Dark\RedisListBundle\Repository\Repository;
+use Dark\RedisListBundle\Collector\Collector;
 
 class Pagination extends Iterator
 {
     private $params;
     private $client;
-    private $repo;
+    private $collector;
     private $templating;
     private $template;
     private $request;
 
-    public function __construct(Client $client, Repository $repo, $templating, $request, $template)
+    public function __construct(Client $client, Collector $collector, $templating, $request, $template)
     {
         $this->client = $client;
-        $this->repo = $repo;
+        $this->collector = $collector;
         $this->templating = $templating;
         $this->request = $request;
         $this->template = $template;
@@ -40,7 +40,7 @@ class Pagination extends Iterator
         $this->params['current'] = $page;
         $this->params['pageRange'] = $pageRange;
         $this->params['pageCount'] = round($count / $perPage);
-        $this->elements = $this->repo->process($elements);
+        $this->elements = $this->collector->process($elements);
     }
 
     public function render()

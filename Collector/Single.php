@@ -1,8 +1,8 @@
 <?php
 
-namespace Dark\RedisListBundle\Repository;
+namespace Dark\RedisListBundle\Collector;
 
-class Single implements Repository
+class Single extends Collector
 {
     private $em;
     private $time;

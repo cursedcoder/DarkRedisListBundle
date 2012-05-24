@@ -14,7 +14,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('repository')->defaultValue('single')->end()
+                ->scalarNode('collector')->defaultValue('single')->end()
                 ->scalarNode('template')->defaultValue('DarkRedisListBundle:Pagination:list.html.twig')->end()
                 ->scalarNode('time')->defaultNull()->end()
             ->end()
