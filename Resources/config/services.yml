@@ -1,6 +1,6 @@
 parameters:
     dark_redis_list.list_manager.class: Dark\RedisListBundle\Manager\ListManager
-    dark_redis_list.manager.class: Dark\RedisKeeperBundle\Manager\Manager
+    dark_redis_list.manager.class: Dark\RedisListBundle\Manager\Manager
     dark_redis_list.pagination.class: Dark\RedisListBundle\Pagination\Pagination
     dark_redis_list.Collector.single.class: Dark\RedisListBundle\Collector\Single
     dark_redis_list.Collector.pieces.class: Dark\RedisListBundle\Collector\Pieces
