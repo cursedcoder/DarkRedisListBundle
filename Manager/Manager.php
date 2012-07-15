@@ -22,7 +22,7 @@ class Manager
                 throw new ManagerException(sprintf("Entity %s must have setRedisFields() method.", get_class($entity)));
             }
             
-            $hashName = sprintf("%s:%d", end(explode("\\", get_class($entity))), $entity->getId());
+            $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
             $fields = $this->client->hgetall($hashName);
             
             $entity->setRedisFields($fields);
@@ -38,7 +38,7 @@ class Manager
                 throw new ManagerException(sprintf("Entity %s must have getRedisFields() method.", get_class($entity)));
             }
             
-            $hashName = sprintf("%s:%d", end(explode("\\", get_class($entity))), $entity->getId());
+            $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
             $fields = $entity->getRedisFields();
             
             $this->client->hmset($hashName, $fields);
