@@ -1,3 +1,4 @@
+{% autoescape false %}
 {% if pageCount > 0 %}
 <ul class="pagination">
 {% if prev is defined %}
@@ -22,3 +23,4 @@
     
 </ul>
 {% endif %}
+{% endautoescape %}

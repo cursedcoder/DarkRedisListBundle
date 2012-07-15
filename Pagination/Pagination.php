@@ -70,6 +70,6 @@ class Pagination extends Iterator
             $params['pagesInRange'][] = $i;
         }
 
-        return $this->templating->render('DarkRedisListBundle:Pagination:list.html.twig', $params);
+        return $this->templating->render($this->template, $params);
     }
 }
