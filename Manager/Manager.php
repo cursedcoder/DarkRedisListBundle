@@ -8,7 +8,7 @@ class Manager
 {
     private $client;
 
-    public function __consturct(Client $client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
@@ -24,7 +24,7 @@ class Manager
             
             $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
             $fields = $this->client->hgetall($hashName);
-            
+
             $entity->setRedisFields($fields);
         }
     }
@@ -40,7 +40,7 @@ class Manager
             
             $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
             $fields = $entity->getRedisFields();
-            
+
             $this->client->hmset($hashName, $fields);
         }
     }
