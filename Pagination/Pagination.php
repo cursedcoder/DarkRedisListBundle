@@ -28,7 +28,10 @@ class Pagination extends Iterator
     public function paginate($hashName, $page = 1, $perPage = 15, $pageRange = 10, $route = null)
     {
         $count = $this->client->hlen($hashName);
-        $range = range($count - $page * $perPage, $count);
+        $from = $count - $page * $perPage;
+        $to = $from + $pageRange;
+
+        $range = range($from, $to);
         $elements = $this->client->hmget($hashName, $range);
 
         if (!is_null($route)) {
