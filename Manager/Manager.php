@@ -1,6 +1,6 @@
 <?php
 
-namespace Dark\RedisKeeperBundle\Manager;
+namespace Dark\RedisListBundle\Manager;
 
 use Predis\Client;
 
