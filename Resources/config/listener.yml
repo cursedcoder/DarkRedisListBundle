@@ -1,5 +1,5 @@
 parameters:
-    dark_redis_list.redis_listener.class: Dark\RediisListBundle\Doctrine\RedisListener
+    dark_redis_list.redis_listener.class: Dark\RedisListBundle\Doctrine\RedisListener
 
 services:
     dark_redis_list.redis_listener:
