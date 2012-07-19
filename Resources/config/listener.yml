@@ -1,0 +1,12 @@
+parameters:
+    dark_redis_list.redis_listener.class: Dark\RediisListBundle\Doctrine\RedisListener
+
+services:
+    dark_redis_list.redis_listener:
+        class: %dark_redis_list.redis_listener.class%
+        arguments: [@dark_redis_list.manager]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist, connection: default }
+            - { name: doctrine.event_listener, event: postUpdate, connection: default }
+            - { name: doctrine.event_listener, event: postLoad, connection: default }
+            - { name: doctrine.event_listener, event: preRemove, connection: default }

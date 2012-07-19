@@ -20,6 +20,10 @@ class DarkRedisListExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
+        if (true === $config['use_listener']) {
+            $loader->load('listener.yml');
+        }
+
         $collector = $config['collector'];
 
         if (!in_array($collector, array('single', 'pieces'))) {

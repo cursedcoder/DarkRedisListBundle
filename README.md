@@ -76,6 +76,9 @@ public function registerBundles()
 * Single — fetches entities one at a time (1 request per entity)
 * Pieces — fetches entities by pieces, for example for list "Post1, Post2, Answer1, Answer2, Post3, Post4" it will take 3 requests
 
+## Listener
+Redis listener is automatically loads Redis-data to your entities. It is enabled by default.
+
 ## Configuration reference
 
 ```jinja
@@ -84,6 +87,7 @@ dark_redis_list:
     collector: single # or pieces
     template: DarkRedisListBundle:Pagination:list.html.twig
     time: 604800 # cache lifetime, 0 by default
+    use_listener: true
 ```
 
 ## Credits
