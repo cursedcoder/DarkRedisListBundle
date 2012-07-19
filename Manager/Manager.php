@@ -44,6 +44,16 @@ class Manager
             $this->client->hmset($hashName, $fields);
         }
     }
+
+    public function remove($entities)
+    {
+        $entities = $this->prepareEntities($entities);
+
+        foreach ($entities as $entity) {
+            $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
+            $this->client->del($hashName);
+        }
+    }
     
     private function prepareEntities($entities)
     {
@@ -55,5 +65,16 @@ class Manager
         }
         
         return $entities;
+    }
+
+    private function processExpr(&$fields)
+    {
+        foreach ($fields as $i => $field) {
+            if (is_array($field)) {
+
+
+                unset($fields[$i]);
+            }
+        }
     }
 }
