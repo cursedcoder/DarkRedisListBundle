@@ -6,6 +6,9 @@ use Predis\Client;
 
 class Manager
 {
+    /**
+     * @var \Predis\Client
+     */
     private $client;
 
     public function __construct(Client $client)
@@ -24,7 +27,7 @@ class Manager
             
             $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
 
-            $fields = $entity->getRedisFields();
+            $fields = array_keys($entity->getRedisFields());
             $fields = $this->client->hmget($hashName, $fields);
 
             $entity->setRedisFields($fields);
