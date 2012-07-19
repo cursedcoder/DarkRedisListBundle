@@ -27,8 +27,10 @@ class Manager
             
             $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
 
-            $fields = array_keys($entity->getRedisFields());
-            $fields = $this->client->hmget($hashName, $fields);
+            $fields = array_combine(
+                array_keys($entity->getRedisFields()),
+                $this->client->hmget($hashName, array_keys($entity->getRedisFields())
+            ));
 
             $entity->setRedisFields($fields);
         }
