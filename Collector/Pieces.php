@@ -53,8 +53,9 @@ class Pieces extends Collector
         $qb = $this->em->createQueryBuilder();
 
         $qb->select('e')
-           ->from($class, 'e')
-           ->where(sprintf('e.id in (%s)', $ids))
+            ->from($class, 'e')
+            ->where(sprintf('e.id in (%s)', $ids))
+            ->orderBy('e.id', 'DESC')
         ;
 
         $query = $qb

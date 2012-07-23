@@ -33,6 +33,7 @@ class Single extends Collector
         $qb->select('e')
             ->from($class, 'e')
             ->where('e.id = :id')
+            ->orderBy('e.id', 'DESC')
             ->setParameter('id', $id)
         ;
 
