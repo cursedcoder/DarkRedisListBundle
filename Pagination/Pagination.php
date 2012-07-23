@@ -43,6 +43,7 @@ class Pagination extends Iterator
         $this->params['current'] = $page;
         $this->params['pageRange'] = $pageRange;
         $this->params['pageCount'] = round($count / $perPage);
+        $this->params['perPage'] = $perPage;
         $this->elements = $this->collector->process($elements);
     }
 
@@ -60,16 +61,16 @@ class Pagination extends Iterator
         $parts = round($params['pageRange'] / 2, 0, PHP_ROUND_HALF_EVEN);
 
         $firstPage = $params['current'] - $parts;
-        $lastPage = $params['current'] + $parts;
+        $lastPage = ($params['current'] + $parts) > $params['pageCount'] ? $params['pageCount'] : $params['current'] + $parts;
 
         if ($firstPage <= 0) {
-            $lastPage += abs($firstPage) + 1;
+            $lastPage += abs($firstPage);
             $firstPage = 1;
         } elseif ($params['pageCount'] - $lastPage < $parts) {
-            $firstPage -= $lastPage - $params['pageCount'];
+            $firstPage -= $params['current'] + $parts - $lastPage;
         }
 
-        for ($i = $firstPage; $i < $lastPage; $i++) {
+        for ($i = $firstPage; $i <= $lastPage; $i++) {
             $params['pagesInRange'][] = $i;
         }
 
