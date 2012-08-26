@@ -25,7 +25,7 @@ class Manager
                 throw new ManagerException(sprintf("Entity %s must have setRedisFields() method.", get_class($entity)));
             }
             
-            $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
+            $hashName = sprintf("%s:%d", get_class($entity), $entity->getId());
 
             $fields = array_combine(
                 array_keys($entity->getRedisFields()),
@@ -45,7 +45,7 @@ class Manager
                 throw new ManagerException(sprintf("Entity %s must have getRedisFields() method.", get_class($entity)));
             }
             
-            $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
+            $hashName = sprintf("%s:%d", get_class($entity), $entity->getId());
             $fields = $entity->getRedisFields();
 
             $this->client->hmset($hashName, $fields);
@@ -57,7 +57,7 @@ class Manager
         $entities = $this->prepareEntities($entities);
 
         foreach ($entities as $entity) {
-            $hashName = sprintf("%s:%d", end((explode("\\", get_class($entity)))), $entity->getId());
+            $hashName = sprintf("%s:%d", get_class($entity), $entity->getId());
             $this->client->del($hashName);
         }
     }
@@ -72,16 +72,5 @@ class Manager
         }
         
         return $entities;
-    }
-
-    private function processExpr(&$fields)
-    {
-        foreach ($fields as $i => $field) {
-            if (is_array($field)) {
-
-
-                unset($fields[$i]);
-            }
-        }
     }
 }
